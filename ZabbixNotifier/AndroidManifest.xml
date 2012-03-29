@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="se.brimstedt.zabbixnotifier"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
+
+    <permission
+        android:name="se.brimstedt.zabbixnotifier.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" >
+    </permission>
+
+    <uses-permission android:name="se.brimstedt.zabbixnotifier.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="ZabbixNotifier"
+        android:description="@string/description"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".ZabbixNotifierActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".C2DMRegistrationReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" >
+                </action>
+
+                <category android:name="se.brimstedt.zabbixnotifier" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".C2DMMessageReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" >
+                </action>
+
+                <category android:name="se.brimstedt.zabbixnotifier" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="RegistrationResultActivity" >
+        </activity>
+        <activity android:name="MessageReceivedActivity" >
+        </activity>
+        <activity android:name="EditServerActivity" >
+        </activity>
+    </application>
+
+</manifest>

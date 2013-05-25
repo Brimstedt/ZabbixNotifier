@@ -1,0 +1,7 @@
+
+ALTER TABLE  device_server
+ADD	messageCount		INT;
+
+ALTER TABLE  device_server
+ADD	lastMessage		TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+

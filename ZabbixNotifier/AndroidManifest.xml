@@ -16,14 +16,15 @@
     <uses-permission android:name="se.brimstedt.zabbixnotifier.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
     <application
-        android:name="ZabbixNotifier"
+        android:name="se.brimstedt.zabbixnotifier.ZabbixNotifier"
         android:description="@string/description"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".ZabbixNotifierActivity"
+            android:name=".ZabbixNotifierActivity_"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +34,7 @@
         </activity>
 
         <receiver
-            android:name=".C2DMRegistrationReceiver"
+            android:name=".C2DMRegistrationReceiver_"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" >
@@ -43,7 +44,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".C2DMMessageReceiver"
+            android:name=".C2DMMessageReceiver_"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" >
@@ -53,11 +54,15 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="RegistrationResultActivity" >
+        <!--  activity android:name="RegistrationResultActivity_" >
+        </activity>-->
+        <activity android:name="MessageReceivedActivity_" 
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+        	android:excludeFromRecents="true"
+        	>
         </activity>
-        <activity android:name="MessageReceivedActivity" >
-        </activity>
-        <activity android:name="EditServerActivity" >
+        <activity android:name="EditServerActivity_" >
         </activity>
     </application>
 

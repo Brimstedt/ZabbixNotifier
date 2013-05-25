@@ -49,6 +49,7 @@ class c2dm {
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
 		$response = curl_exec($curl);
+		var_dump($response);
 		curl_close($curl);
 
 		// Get the Auth string
@@ -65,7 +66,7 @@ class c2dm {
 			'registration_id' => $deviceRegistrationId,
 			'collapse_key' => 0,
 			'data.server' => $server,
-				'data.message' => $message
+			'data.message' => $message
 		);
 
 		$curl = curl_init();
@@ -80,12 +81,11 @@ class c2dm {
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
 		$respone = curl_exec($curl);
-		echo curl_errno($curl);
-		echo curl_error($curl);
+
 		curl_close($curl);
 
 		return $respone;
-	}
+	}	
 }
 
 ?>

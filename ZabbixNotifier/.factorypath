@@ -1,3 +1,4 @@
 <factorypath>
-    <factorypathentry kind="EXTJAR" id="C:\Users\linus\Projects\androidannotations-2.5\androidannotations-2.5.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="WKSPJAR" id="/androidannotations/target/androidannotations-2.6-SNAPSHOT.jar" enabled="false" runInBatchMode="false"/>
+    <factorypathentry kind="PLUGIN" id="com.googlecode.androidannotations" enabled="true" runInBatchMode="false"/>
 </factorypath>

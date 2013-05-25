@@ -1,84 +1,71 @@
 package se.brimstedt.zabbixnotifier;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import android.R.array;
+import se.brimstedt.zabbixnotifier.dao.IServerList;
+import se.brimstedt.zabbixnotifier.dao.ServerConfiguration;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class ZabbixNotifierActivity extends ListActivity {
+import com.google.inject.Inject;
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Click;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.RoboGuice;
 
-	private static final String PREFS_NEXT_ID = "NextId";
+@EActivity(R.layout.main)
+@RoboGuice
+public class ZabbixNotifierActivity extends ListActivity
+{
+
 	public final static String AUTH = "authentication";
-	private ArrayAdapter<String> arrayAdapter;
+	private ArrayAdapter<ServerConfiguration> arrayAdapter;
+//	private PersitanceServiceSqlLiteImpl serverDatabase;
+	
+	@Inject
+	private IServerList serverList;
 
-	// Example Activity to trigger a request for a registration ID to the Google
-	// server
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		
-		arrayAdapter = new ArrayAdapter<String>(this, R.layout.server_item);
-		populateServerList(arrayAdapter);
-		
+	@AfterViews
+	public void afterViews()
+	{
+
+		arrayAdapter = new ServerAdapter(this, R.layout.server_item, serverList);
+//		populateServerList(arrayAdapter);
+
 		setListAdapter(arrayAdapter);
 
-		  ListView lv = getListView();
-		  lv.setTextFilterEnabled(true);
+		ListView lv = getListView();
+		lv.setTextFilterEnabled(true);
 
-		  lv.setOnItemClickListener(new OnItemClickListener() {
-		    public void onItemClick(AdapterView<?> parent, View view,
-		        int position, long id) {
-		      // When clicked, show a toast with the TextView text
-		      Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-		          Toast.LENGTH_SHORT).show();
-		    }
-		  });
-	}
-
-	private void populateServerList(ArrayAdapter<String> arrayAdapter2) {
-		arrayAdapter2.add("test");
-
-		SharedPreferences settings = getSharedPreferences(
-				ZabbixNotifier.PREFS_SERVER_LIST, 0);
-		Map<String, ?> all = settings.getAll();
-		for(Object item : all.entrySet())
+		lv.setOnItemClickListener(new OnItemClickListener()
 		{
-			arrayAdapter2.add(item.toString());
-		}
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Log.d("C2DM", "Add new server");
+				Intent intent = new Intent(parent.getContext(), EditServerActivity_.class);
+				intent.putExtra(EditServerActivity.SERVER_TO_EDIT, arrayAdapter.getItem(position).getServerId());
+				startActivity(intent);
+
+				// When clicked, show a toast with the TextView text
+//				Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
-	public void addServer(View view) {
 
+	@Click
+	public void addServer(View view)
+	{ 
 		Log.d("C2DM", "Add new server");
-		Intent intent = new Intent(this, EditServerActivity.class);
-		intent.putExtra("se.brimstedt.zabbixnotifier.serverToEdit",
-				getNextServerId());
+		Intent intent = new Intent(this, EditServerActivity_.class);
+		intent.putExtra(EditServerActivity.SERVER_TO_EDIT, serverList.getNewServerId());
 		startActivity(intent);
-		
-		
-	}
-
-	private int getNextServerId() {
-		SharedPreferences settings = getSharedPreferences(
-				ZabbixNotifier.PREFS_SERVER_LIST, MODE_PRIVATE);
-		int id = settings.getInt(PREFS_NEXT_ID, 0);
-		settings.edit().putInt(PREFS_NEXT_ID, id + 1).commit();
-		
-		return id;
+  
 	}
 
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, ZabbixNotifierActivity!</string>
     <string name="app_name">ZabbixNotifier</string>
     <string name="description">Push Notification for Zabbix</string>
     <string name="show">Show Notifications</string>
@@ -10,5 +9,8 @@
     <string name="addserver">Add Server</string>
     <string name="defaultserver">http://zabbix.mydomain.com</string>
     <string name="save">Save</string>
+    <string name="google_registration_successfull">Google registration successfull</string>
+    <string name="zabbixnotifier_registration_failed">ZabbixNotifier registration failed</string>
+    <string name="zabbixnotifier_registration_successful">ZabbixNotifier registration successful</string>
 
 </resources>

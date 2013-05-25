@@ -4,10 +4,16 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/linus/Projects/androidannotations-2.5/androidannotations-2.5-api.jar"/>
-	<classpathentry kind="src" path=".apt_generated">
+	<classpathentry kind="src" path=".apt_generateds">
 		<attributes>
 			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/vilinbri/Projects/androidannotations/AndroidAnnotations/androidannotations/target/androidannotations-2.6-SNAPSHOT-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/guice-2.0-no_aop.jar" sourcepath="C:/Users/linus/.m2/repository/com/google/inject/guice/2.0-no_aop/guice-2.0-no_aop-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/roboguice-1.1.2.jar" sourcepath="lib/roboguice-1.1.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZabbixNotifier/lib/roboguice-1.1.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin/classes"/>
